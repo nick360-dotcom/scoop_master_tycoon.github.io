@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ff7f96">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Scoop Master">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <title>Scoop Master Tycoon</title>
+</head>
+<body>
+  <main class="app" id="app">
+    <header>
+      <div>
+        <h1 id="shopName">Level 1 Ice-Cream Cart</h1>
+        <div id="xpLabel" class="sub">0 / 75 XP</div>
+      </div>
+      <div class="top-actions">
+        <span id="modeBadge" class="badge">Ready</span>
+        <button id="shiftButton" class="btn hidden">⏸ End shift</button>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="metric"><div class="label">Level</div><div id="levelValue" class="value">1</div></div>
+      <div class="metric"><div class="label">Money</div><div id="moneyValue" class="value">$0</div></div>
+      <div class="metric"><div class="label">Served</div><div id="servedValue" class="value">0</div></div>
+      <div class="metric"><div class="label">Combo</div><div id="comboValue" class="value">×0</div></div>
+      <div class="metric"><div class="label">Prestige</div><div id="prestigeValue" class="value">0</div></div>
+    </section>
+
+    <section class="progress-wrap">
+      <div class="progress-head"><span>Level progress</span><span id="levelPercent">0%</span></div>
+      <div class="progress"><div id="xpBar"></div></div>
+    </section>
+
+    <section class="layout">
+      <div class="stage">
+        <div class="card">
+          <div class="panel-title">
+            <div><h2>Customer Counter</h2><p class="sub">Match the requested flavour.</p></div>
+            <span id="rushBadge" class="badge hidden">Rush</span>
+          </div>
+          <div class="customer">
+            <div id="avatar" class="avatar">🧒</div>
+            <div>
+              <div style="display:flex;justify-content:space-between;gap:8px"><strong id="customerName">Mia</strong><strong id="reward">$4</strong></div>
+              <div id="request" class="request">⚪ Vanilla</div>
+              <div class="patience"><div id="patienceBar"></div></div>
+              <div id="patienceText" class="sub" style="margin-top:5px">Patient</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="panel-title">
+            <div><h2>Flavour Station</h2><p class="sub">Tap flavours to prepare the order.</p></div>
+            <button id="clearButton" class="btn">Clear</button>
+          </div>
+          <div id="flavourShelf" class="flavours" style="margin-top:10px"></div>
+          <div class="prepared">
+            <div><div class="sub">Prepared order</div><strong id="preparedText">Empty cone</strong></div>
+            <div id="cone" class="cone">▫️<br>🔻</div>
+          </div>
+          <button id="serveButton" class="btn primary" style="width:100%;margin-top:10px">Serve Customer</button>
+        </div>
+
+        <div id="closedOverlay" class="overlay hidden">
+          <div class="card" style="max-width:460px;width:100%;text-align:center">
+            <div style="font-size:2.6rem">🛠️</div>
+            <h2>Shop Closed</h2>
+            <p class="sub" style="margin-top:6px">Serving is frozen while you upgrade or rebirth.</p>
+            <button id="startShiftButton" class="btn primary" style="width:100%;margin-top:14px">▶ Start New Shift</button>
+            <div id="pausedRebirth" class="hidden" style="margin-top:12px;border:1px solid var(--border);border-radius:16px;padding:12px">
+              <strong>Prestige Rebirth Available</strong>
+              <p class="sub" style="margin-top:6px">Restart at Level 1 and increase Prestige permanently.</p>
+              <button id="pausedRebirthButton" class="btn" style="width:100%;margin-top:10px">♻️ Rebirth Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h2>Shop Interior</h2>
+          <p class="sub">Available while playing or paused.</p>
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:12px">
+            <div><strong id="upgradeLevel">Counter Lv. 0</strong><div id="upgradeEffect" class="sub">Normal earnings</div></div>
+            <button id="upgradeButton" class="btn primary">Upgrade $25</button>
+          </div>
+        </div>
+
+        <div id="rebirthCard" class="card hidden" style="margin-top:12px">
+          <h2>Prestige Rebirth</h2>
+          <p class="sub">Available at Level 10, including while paused.</p>
+          <div class="small-grid" style="margin-top:12px">
+            <div class="metric"><div class="label">Current</div><div id="currentPrestige" class="value">0</div></div>
+            <div class="metric"><div class="label">After</div><div id="nextPrestige" class="value">1</div></div>
+          </div>
+          <button id="rebirthButton" class="btn primary" style="width:100%;margin-top:10px">♻️ Rebirth</button>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h2>Statistics</h2>
+          <div class="small-grid" style="margin-top:10px">
+            <span class="sub">Shifts</span><strong id="shiftStat" style="text-align:right">0</strong>
+            <span class="sub">Play time</span><strong id="timeStat" style="text-align:right">00:00</strong>
+          </div>
+          <div class="install-note">On iPhone/iPad: Safari → Share → Add to Home Screen.</div>
+        </div>
+      </aside>
+    </section>
+
+    <div id="message" class="message">Tap Start to begin.</div>
+
+    <div id="startScreen" class="banner">
+      <div class="banner-card">
+        <div class="banner-icon">🍨</div>
+        <div class="banner-title">Scoop Master Tycoon</div>
+        <p class="sub" style="margin-top:8px">Serve customers, reach Level 10 and prestige infinitely.</p>
+        <button id="startGameButton" class="btn primary" style="width:100%;margin-top:16px">Start First Shift</button>
+      </div>
+    </div>
+
+    <button id="banner" class="banner hidden" aria-live="assertive">
+      <div class="banner-card">
+        <div id="bannerIcon" class="banner-icon">⭐</div>
+        <div id="bannerType" class="sub" style="text-transform:uppercase;letter-spacing:.14em;margin-top:8px">Milestone</div>
+        <div id="bannerTitle" class="banner-title">Level Up</div>
+        <p id="bannerText" style="margin-top:10px"></p>
+        <div id="bannerReward" class="banner-reward"></div>
+        <div class="sub" style="margin-top:16px">Tap anywhere to continue</div>
+      </div>
+    </button>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
